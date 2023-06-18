@@ -34,7 +34,7 @@ function Album() {
     };
     musicsData();
   }, [id]);
-  console.log(getSongState);
+
   if (loading) {
     return <Loading />;
   }
