@@ -12,9 +12,9 @@ function Favorites() {
     const listSongs = async () => {
       setLoading(true);
       const favoriteSongs = await getFavoriteSongs();
-      setLoading(false);
       if (favoriteSongs) {
         setFavoritesSongsList(favoriteSongs);
+        setLoading(false);
       }
     };
     listSongs();
