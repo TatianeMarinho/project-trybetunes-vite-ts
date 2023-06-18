@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Search from './pages/Search';
 import Album from './pages/Album';
 import Layout from './pages/Layout';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
         <Route path="/" element={ <Layout /> }>
           <Route path="/search" element={ <Search /> } />
           <Route path="/album/:id" element={ <Album /> } />
-          {/* <Route path="/favorites" element={ <Favorites /> } />
-          <Route path="/profile" element={ <Profile /> } />
+          <Route path="/favorites" element={ <Favorites /> } />
+          {/* <Route path="/profile" element={ <Profile /> } />
           <Route path="/profile/edit" element={ <PorfileEdit /> } />
           <Route path="*" element={ <NotFound /> } /> */}
         </Route>
