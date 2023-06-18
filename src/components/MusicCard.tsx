@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { SongType } from '../types';
 import Checked from '../images/checked_heart.png';
 import emptyChecked from '../images/empty_heart.png';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 type SongListProps = {
   songList: SongType;
@@ -10,6 +11,23 @@ type SongListProps = {
 function MusicCard({ songList }: SongListProps) {
   const { trackName, previewUrl, trackId } = songList;
   const [checked, setChecked] = useState(false);
+  /*   const [savedSongFavorite, setSavedSongFavorite] = useState<SongType[]>([]); */
+
+  const handleclick = async () => {
+    setChecked(!checked);
+    if (!checked) {
+      await addSong({ trackId, trackName, previewUrl });
+      /*       setSavedSongFavorite([...savedSongFavorite, saveSong]); */
+    } else {
+      await removeSong({ trackId, trackName, previewUrl });
+    }
+  };
+
+  /*  useEffect(() => {
+    const favoriteMusic = async () => {
+      const song = await addSong()
+    }
+  }) */
 
   return (
     <>
@@ -20,7 +38,7 @@ function MusicCard({ songList }: SongListProps) {
           name="favorite"
           id={ String(trackId) }
           checked={ checked }
-          onClick={ () => setChecked(!checked) }
+          onClick={ handleclick }
         />
         {
           (checked)
