@@ -28,7 +28,6 @@ function Search() {
     try {
       setLoading(true);
       const result = await searchAlbumsAPI(artistName.artist);
-      console.log(result);
       if (result) {
         setAlbumsList(result);
         setMessageArtist(`Resultado de álbuns de: ${artistName.artist}`);
