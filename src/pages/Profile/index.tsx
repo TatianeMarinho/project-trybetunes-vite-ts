@@ -3,7 +3,7 @@ import { getUser } from '../../services/userAPI';
 import Loading from '../../components/loading';
 import CardUserName from '../../components/cardUserName';
 
-const INICIAL_STATE = {
+export const INICIAL_STATE = {
   name: '',
   email: '',
   image: '',
