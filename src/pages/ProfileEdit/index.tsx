@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getUser, updateUser } from '../../services/userAPI';
-import Profile, { INICIAL_STATE } from '../Profile';
+import { INICIAL_STATE } from '../Profile';
 import Loading from '../../components/loading';
-import FormProfileUser from '../../components/formProfile';
 import { UserType } from '../../types';
 
 function ProfileEdit() {
   const [user, setUser] = useState<UserType>(INICIAL_STATE);
   const [loading, setLoading] = useState(false);
-  const [formUser, setFormUser] = useState<UserType>(INICIAL_STATE);
 
   const navigate = useNavigate();
 
@@ -51,23 +49,67 @@ function ProfileEdit() {
 
   const handleSubmit = async (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormUser({ ...user });
     setLoading(true);
-    if (formUser) {
-      await updateUser(formUser);
-      setLoading(false);
-      navigate('/profile');
-    }
-    console.log(formUser);
+    await updateUser(user);
+    setLoading(false);
+    navigate('/profile');
   };
-  console.log(user);
+
   return (
-    <FormProfileUser
-      userForm={ user }
-      onChange={ handleOnChange }
-      validate={ validForm }
-      onSubmit={ handleSubmit }
-    />
+    <form onSubmit={ handleSubmit }>
+      <label>
+        Image:
+        <input
+          type="text"
+          name="image"
+          value={ user.image }
+          onChange={ handleOnChange }
+          placeholder="insira sua url da imagem aqui"
+          data-testid="edit-input-image"
+        />
+      </label>
+      <label>
+        Nome:
+        <input
+          type="text"
+          name="name"
+          value={ user.name }
+          onChange={ handleOnChange }
+          placeholder="insira como prefere ser chamado"
+          data-testid="edit-input-name"
+        />
+      </label>
+      <label>
+        E-mail:
+        <input
+          type="email"
+          name="email"
+          value={ user.email }
+          onChange={ handleOnChange }
+          placeholder="insira um email válido"
+          data-testid="edit-input-email"
+        />
+      </label>
+      <label>
+        Descrição:
+        <input
+          type="text"
+          name="description"
+          value={ user.description }
+          onChange={ handleOnChange }
+          maxLength={ 300 }
+          placeholder="nos conte sobre você"
+          data-testid="edit-input-description"
+        />
+      </label>
+      <button
+        type="submit"
+        disabled={ !validForm() }
+        data-testid="edit-button-save"
+      >
+        Salvar
+      </button>
+    </form>
   );
 }
 
