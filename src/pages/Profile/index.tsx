@@ -10,7 +10,7 @@ export const INICIAL_STATE = {
   description: '',
 };
 
-export function Profile() {
+function Profile() {
   const [userName, setUserName] = useState(INICIAL_STATE);
   const [loading, setLoading] = useState(false);
 
